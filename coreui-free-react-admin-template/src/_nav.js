@@ -1,17 +1,13 @@
 export default {
   items: [
     {
-      name: 'Dashboard',
+      name: 'APP Contadores',
       url: '/dashboard',
       icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
     },
     {
       title: true,
-      name: 'Theme',
+      name: 'Inicio',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
@@ -30,7 +26,7 @@ export default {
     },
     {
       title: true,
-      name: 'Components',
+      name: 'Administracion',
       wrapper: {
         element: '',
         attributes: {},

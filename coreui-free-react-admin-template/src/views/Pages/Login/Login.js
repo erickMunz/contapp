@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 class Login extends Component {
+  state={
+    data:{
+      usuario:'',
+      correo:''
+    },
+    loading:''
+  }
+  validate = () =>{
+
+  }
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -12,8 +22,8 @@ class Login extends Component {
                 <Card className="p-4">
                   <CardBody>
                     <Form>
-                      <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
+                      <h1>Inicia session</h1>
+                      <p className="text-muted">Por favor ingresa tus credenciales</p>
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -35,7 +45,7 @@ class Login extends Component {
                           <Button color="primary" className="px-4">Login</Button>
                         </Col>
                         <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
+                          <Button color="link" className="px-0">¿Olvidaste tu contraseña?</Button>
                         </Col>
                       </Row>
                     </Form>
@@ -44,10 +54,9 @@ class Login extends Component {
                 <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Button color="primary" className="mt-3" active>Register Now!</Button>
+                      <h2>Registrare</h2>
+                      <p>Para poder usar esta app es necesaria una cuenta </p>
+                      <Button color="primary"  className="mt-3" active>Registrate ahora !</Button>
                     </div>
                   </CardBody>
                 </Card>
