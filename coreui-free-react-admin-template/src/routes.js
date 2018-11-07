@@ -182,6 +182,14 @@ const User = Loadable({
   loading: Loading,
 });
 
+const AltaAdmin = Loadable({
+  loader: () => import ('./views/Alta/Admin'),
+  loading: Loading,
+});
+const AltaCont = Loadable({
+  loader: () => import ('./views/Alta/Admin'),
+  loading: Loading,
+});
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -227,6 +235,8 @@ const routes = [
   { path: '/charts', name: 'Charts', component: Charts },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/altacon', exact: true,  name: 'Alta contador', component: AltaCont },
+  { path: '/altaadmin', exact: true,  name: 'Alta contador', component: AltaAdmin },
 ];
 
 export default routes;

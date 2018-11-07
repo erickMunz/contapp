@@ -15,13 +15,18 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Colors',
-      url: '/theme/colors',
-      icon: 'icon-drop',
+      name: 'Inicio',
+      url: '/charts',
+      icon: 'icon-pie-chart',
     },
     {
-      name: 'Typography',
+      name: 'Asignacion',
       url: '/theme/typography',
+      icon: 'icon-pencil',
+    },
+    {
+      name: 'Alta Perfil',
+      url: '/altaadmin',
       icon: 'icon-pencil',
     },
     {
@@ -251,18 +256,6 @@ export default {
         },
       ],
     },
-    {
-      name: 'Download CoreUI',
-      url: 'http://coreui.io/react/',
-      icon: 'icon-cloud-download',
-      class: 'mt-auto',
-      variant: 'success',
-    },
-    {
-      name: 'Try CoreUI PRO',
-      url: 'http://coreui.io/pro/react/',
-      icon: 'icon-layers',
-      variant: 'danger',
-    },
+    
   ],
 };
