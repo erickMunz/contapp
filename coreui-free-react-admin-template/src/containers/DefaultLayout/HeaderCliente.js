@@ -28,22 +28,7 @@ class DefaultHeader extends Component {
           <NavItem className="px-3">
             <NavLink href="/">Inicio</NavLink>
           </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#/altaadmin">Administrador</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#/altacon">Contador</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#/users">Contabilidades</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#/users">Contador</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#/users">Asignacion</NavLink>
-          </NavItem>
-          
+         
         </Nav>
         <Nav className="ml-auto" navbar>
          
@@ -54,7 +39,7 @@ class DefaultHeader extends Component {
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>config</strong></DropdownItem>
               <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
-              <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
+              <DropdownItem href="/"><i className="fa fa-wrench"></i> Configuracion</DropdownItem>
               
               <DropdownItem><i className="fa fa-lock"></i> Cerrar session</DropdownItem>
             </DropdownMenu>
