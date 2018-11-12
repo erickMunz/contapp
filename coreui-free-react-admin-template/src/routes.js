@@ -191,6 +191,21 @@ const AltaCont = Loadable({
   loading: Loading,
 });
 
+const TablaAdmin = Loadable({
+  loader: () => import ('./views/Tabla/Admin'),
+  loading: Loading,
+});
+const TablaContabilidad = Loadable({
+  loader: () => import ('./views/Tabla/Contabilidad'),
+  loading: Loading,
+});
+const TablaContadores = Loadable({
+  loader: () => import ('./views/Tabla/Contabilidad'),
+  loading: Loading,
+});
+
+
+
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -237,6 +252,9 @@ const routes = [
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/altacon', exact: true,  name: 'Alta contador', component: AltaCont },
   { path: '/altaadmin', exact: true,  name: 'Alta contador', component: AltaAdmin },
+  { path: '/tablaadmin', exact: true,  name: 'Tabla administradores', component: TablaAdmin },
+  { path: '/tablacontabilidad', exact: true,  name: 'Tabla contabilidad', component: TablaContabilidad },
+  { path: '/tablacontador', exact: true,  name: 'Tabla contador', component: TablaContadores },
 ];
 
 export default routes;

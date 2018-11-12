@@ -35,10 +35,10 @@ class DefaultHeader extends Component {
             <NavLink href="#/altacon">Contador</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="#/users">Contabilidades</NavLink>
+            <NavLink href="#/tablacontabilidad">Contabilidades</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="#/users">Contador</NavLink>
+            <NavLink href="#/tablaadmin">Contador</NavLink>
           </NavItem>
           <NavItem className="px-3">
             <NavLink href="#/users">Asignacion</NavLink>
