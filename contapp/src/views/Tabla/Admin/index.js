@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import filterFactory, { textFilter , numberFilter} from 'react-bootstrap-table2-filter';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table ,Button} from 'reactstrap';
 
 class Tables extends Component {
   render() {
@@ -42,7 +42,23 @@ class Tables extends Component {
   sort: true
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Rol'
+    },
+    {
+      dataField: 'isDummyField',
+      text:'Eliminar',
+      events: {
+        onClick: (e, column, columnIndex, row, rowIndex) => {
+          
+          console.log(row);
+          console.log(rowIndex);
+          alert('Click on Product ID field' );
+        }
+      },
+      formatter: (cellContent, row) => (
+        <Button block color="danger" className="btn-pill">Eliminar</Button>
+      )
+      
     },
     {
       dataField: 'isDummyField',
@@ -54,7 +70,7 @@ class Tables extends Component {
           console.log(columnIndex);
           console.log(row);
           console.log(rowIndex);
-          alert('Click on Product ID field');
+          alert('Click on Product ID field'+rowIndex);
         },
         onMouseEnter: (e, column, columnIndex, row, rowIndex) => {
           console.log(e);
@@ -66,11 +82,7 @@ class Tables extends Component {
         }
       },
       formatter: (cellContent, row) => (
-        <div className="checkbox disabled">
-          <label>
-            <input type="checkbox" checked={ row.inStock } disabled />
-          </label>
-        </div>
+        <Button block color="dark" className="btn-pill">Editar </Button>
       )
       
     }
