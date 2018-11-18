@@ -24,6 +24,7 @@ import DefaultHeader from './DefaultHeader';
 
 class DefaultLayout extends Component {
   render() {
+    
     return (
       <div className="app">
         <AppHeader fixed>
@@ -48,6 +49,7 @@ class DefaultLayout extends Component {
                       : (null);
                   },
                 )}
+                {1==1?<Redirect from="/" to="/login" />:<Redirect from="/login" to="/dashboard" />}
                 <Redirect from="/" to="/dashboard" />
               </Switch>
             </Container>

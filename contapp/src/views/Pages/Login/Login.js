@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Loadable from 'react-loadable';
 import {post} from '../../../api/post';
 import {Redirect} from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row ,Alert} from 'reactstrap';
+import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row ,Alert, FormFeedback} from 'reactstrap';
 
 class Login extends Component {
  constructor(props){
@@ -12,6 +11,7 @@ class Login extends Component {
      password:'',
      redirect: false,
      loading:false,
+     register: false,
      error:{
        usuario:'',
        contraseña:''
@@ -23,37 +23,72 @@ class Login extends Component {
     return re.test(String(email).toLowerCase());
   }
   validate = (data) =>{
-    let errores:{
+    console.log(data);
+    let errores={
       usuario:''
       ,contraseña:''}
     if(!this.validateEmail(data.username)){
       errores.usuario="Error en el correo";
+      this.setState({error:errores.usuario});
+      if(data.password!='' && data.password.length<5){
+        errores.contraseña='Error la contraseña deberia ser de mas de 5 caracteres';
+        this.setState({error:errores});
+      }else{
+        errores.contraseña="";
+        console.log('error contraseña')
+        this.setState({error:errores})
+        return 1;
+      }
+    }else{
+      if(data.password!='' && data.password.length<5){
+        errores.contraseña='Error la contraseña deberia ser de mas de 5 caracteres';
+        this.setState({error:errores});
+      }else{
+        errores.contraseña="";
+        console.log('error contraseña')
+        this.setState({error:errores})
+        return 1;
+      }
+      errores.usuario="";
+      errores.contraseña=this.state.password;
+      this.setState({error:errores  })
+      return 1;
     }
-    if(data.contraseña.length<5){
-      errores.contraseña='Error la contraseña deberia ser de mas de 5 caracteres';
-    }
-    this.setState({errores});
+    
   }
   onChange = (e) =>{
     this.setState({[e.target.name]: e.target.value});
     this.validate(this.state);
+    
   }
   onSubmit = () =>{
-    post('login',this.state).then((result)=>{
-      let response= result;
-      if(response.user){
-        sessionStorage.setItem('usuario', response.user);
-        this.setState({redirect:true});
-      }
-      console.log(response);
-    })
-    this.setState({loading:true})
+    if(this.validate(this.state)){
+
+      post('login',this.state).then((result)=>{
+        let response= result;
+        if(response.user){
+          sessionStorage.setItem('usuario', response.user);
+          this.setState({redirect:true});
+        }
+        console.log(response);
+      })
+      this.setState({loading:true})
+    }else{
+      console.log("no mande ni mergas");
+    }
+  }
+  register = () =>{
+    this.setState({register:true})
   }
   render() {
     if(this.state.redirect){
       return (<Redirect to={"/home"}/>);
     }
-    const {error} = this.state; 
+    if(this.state.register){
+      
+      return (<Redirect to={"/register"}/>);
+    }
+    const {error,data} = this.state; 
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -65,15 +100,17 @@ class Login extends Component {
                     <Form >
                       <h1>Inicia session</h1>
                       <p className="text-muted">Por favor ingresa tus credenciales</p>
-
-                        {error.username && (  <Alert color="danger">error.username</Alert>)}
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Username" autoComplete="username" name="username" onChange={this.onChange}/>
+                        <Input type="text" placeholder="Username" autoComplete="username" name="username"  onChange={this.onChange} invalid={error.usuario?true:false}/>
+                        <FormFeedback >
+                        Correo no valido
+                        </FormFeedback>
+                       
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -81,7 +118,10 @@ class Login extends Component {
                             <i className="icon-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Password" autoComplete="current-password" name="password" onChange={this.onChange}/>
+                        <Input type="password" placeholder="Password" autoComplete="current-password" name="password" onChange={this.onChange} invalid={error.contraseña?true:false}/>
+                        <FormFeedback >
+                        Contraseña no valida
+                        </FormFeedback> 
                       </InputGroup>
                       <Row>
                         <Col xs="6">
@@ -99,7 +139,7 @@ class Login extends Component {
                     <div>
                       <h2>Registrare</h2>
                       <p>Para poder usar esta app es necesaria una cuenta </p>
-                      <Button color="primary"  className="mt-3" active >Registrate ahora !</Button>
+                      <Button color="primary"  className="mt-3" active onClick={this.register}>Registrate ahora !</Button>
                     </div>
                   </CardBody>
                 </Card>

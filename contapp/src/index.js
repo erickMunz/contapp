@@ -4,7 +4,7 @@ import './polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import '/home/erick/Documentos/reac/contapp/contapp/node_modules/react-bootstrap-table-next/dist/react-bootstrap-table2.css';
+import '../node_modules/react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
