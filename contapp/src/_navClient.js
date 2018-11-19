@@ -21,7 +21,7 @@ export default {
     },
     {
       name: 'Asignacion',
-      url: '/asignaciones',
+      url: '/theme/typography',
       icon: 'icon-pencil',
     },
     {

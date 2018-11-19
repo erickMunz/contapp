@@ -208,7 +208,7 @@ const TablaContadores = Loadable({
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const routes = [
+const routesDef = [
   { path: '/', exact: true, name: 'Inicio', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
@@ -257,4 +257,4 @@ const routes = [
   { path: '/tablacontador', exact: true,  name: 'Tabla contador', component: TablaContadores },
 ];
 
-export default routes;
+export default routesDef;

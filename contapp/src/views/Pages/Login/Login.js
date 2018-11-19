@@ -18,6 +18,7 @@ class Login extends Component {
      }
    }
  }
+ 
   validateEmail =(email) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -88,7 +89,7 @@ class Login extends Component {
       
       return (<Redirect to={"/register"}/>);
     }
-    const {error,data} = this.state; 
+    const {error} = this.state; 
     return (
       <div className="app flex-row align-items-center">
         <Container>
