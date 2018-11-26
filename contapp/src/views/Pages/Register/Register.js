@@ -98,14 +98,14 @@ class Register extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Username" autoComplete="username" name="username" onChange={this.onChange}  invalid={error.username?true:false} />
+                      <Input type="text" placeholder="Nombre completo" autoComplete="username" name="username" onChange={this.onChange}  invalid={error.username?true:false} />
                       <FormFeedback>Error, no se permiten números</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Email" autoComplete="email" name="email" onChange={this.onChange} invalid={error.email?true:false}/>
+                      <Input type="text" placeholder="Correo electronico" autoComplete="email" name="email" onChange={this.onChange} invalid={error.email?true:false}/>
                       <FormFeedback>Correo no válido</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -114,7 +114,7 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Password" autoComplete="new-password" name="password" onChange={this.onChange} invalid={error.password?true:false}/>
+                      <Input type="password" placeholder="Contraseña" autoComplete="new-password" name="password" onChange={this.onChange} invalid={error.password?true:false}/>
                       <FormFeedback>Contraseña no válida</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-4">
@@ -123,7 +123,7 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password" autoComplete="new-password" name="rpassword" onChange={this.onChange} invalid={error.rpassword?true:false} />
+                      <Input type="password" placeholder="Confira contraseña" autoComplete="new-password" name="rpassword" onChange={this.onChange} invalid={error.rpassword?true:false} />
                       <FormFeedback>Las contraseñas no son iguales</FormFeedback>
                     </InputGroup>
                     <Button color="success" block>Crea tu cuenta</Button>

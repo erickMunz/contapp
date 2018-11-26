@@ -15,19 +15,63 @@ import {
   AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_nav';
-import navClient from '../../_navDef';
+import navigation from '../../navs/_nav';
+import navClient from '../../navs/_navClient';
+import navAdmin from '../../navs/_navAdmin';
 // routes config
-import routes from '../../routes';
-import routesClient from '../../routesClient';
-import routesDef  from '../../routesDef';
+import routes from '../../routes/routes';
+import routesClient from '../../routes/routesClient';
+import routesDef  from '../../routes/routesDef';
+import routesAdmin from '../../routes/routesAdmin';
 import DefaultAside from './DefaultAside';
 import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
+import api from '../../api';
 
 class DefaultLayout extends Component {
-  render() {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      cliente:false,
+      admin:false,
+      conta:false,
+      isLoggedin:false
+    }
+  }
+  
+  componentWillMount(){
+    if(sessionStorage.getItem('xkey')){
+      console.log(sessionStorage.getItem('xkey'))
+      this.setState({isLoggedin:true})
+    }
+  }
+  
+  enrutar = () =>{
+    if(this.state.isLoggedin){
+      this.setState({admin:true})
+    }
+  }
+  render(){
+    const {isLoggedin} = this.state;
+    if(!isLoggedin){
+      return(<Redirect to="/login"/>)
+    }
+    let nav, ruta;
+    switch(sessionStorage.getItem('ROL')){
+      case 'ADMIN': console.log("admin chidi"); nav=navAdmin; ruta=routesAdmin; break;
+      case 'CONTA': nav=navigation; ruta=routes; break;
+      case 'CLIENT': nav=navClient; ruta=routesClient; break;
+      default : nav=navAdmin; ruta=routesAdmin;  
+    }
+    switch(sessionStorage.getItem('ROL')){
+      case 'ADMIN': nav=navAdmin; break;
+      case 'CONTA': nav=navigation; break;
+      case 'CLIENT': nav=navClient; break;
+      default : nav=navAdmin;  
+    }
     
+    //let nav=navAdmin;
     return (
       <div className="app">
         <AppHeader fixed>
@@ -37,30 +81,22 @@ class DefaultLayout extends Component {
           <AppSidebar fixed display="lg">
             <AppSidebarHeader />
             <AppSidebarForm />
-            {1==1?<AppSidebarNav navConfig={navigation} {...this.props} />:<AppSidebarNav navConfig={navClient} {...this.props} />}
+            <AppSidebarNav navConfig={nav} {...this.props} />
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            {1==1?<AppBreadcrumb appRoutes={routes}/>: <AppBreadcrumb appRoutes={routesDef}/>}
             <Container fluid>
               <Switch>
-                {1==1?routes.map((route, idx) => {
+                {ruta.map((route, idx) => {
                     return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
                         <route.component {...props} />
                       )} />)
                       : (null);
                   },
-                ):routesDef.map((route, idx) => {
-                  return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
-                      <route.component {...props} />
-                    )} />)
-                    : (null);
-                },
-              )}
-                {1!=1?<Redirect from="/" to="/login" />:<Redirect from="/login" to="/dashboard" />}
-               
-              </Switch>
+                )}
+                </Switch>
+              {<Redirect from="/" to="/charts" />}
             </Container>
           </main>
           <AppAside fixed>

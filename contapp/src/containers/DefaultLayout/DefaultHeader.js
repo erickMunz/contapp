@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
+import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import Redirect from 'react-router-dom/Redirect';
 
 const propTypes = {
   children: PropTypes.node,
@@ -13,12 +14,31 @@ const propTypes = {
 const defaultProps = {};
 
 class DefaultHeader extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      redirect:false
+    }
+  }
+
+
+  loggout = () =>{
+    console.log("cerrar session");
+    sessionStorage.clear();
+    this.setState({redirect:true})
+
+  }
+
   render() {
 
     // eslint-disable-next-line
+    const {redirect} = this.state;
     const { children, ...attributes } = this.props;
-
+    if(redirect){
+      return (<Redirect to="/login"/>);
+    }
     return (
+    
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
      
@@ -56,7 +76,8 @@ class DefaultHeader extends Component {
               <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
               <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
               
-              <DropdownItem><i className="fa fa-lock"></i> Cerrar session</DropdownItem>
+              <DropdownItem  onClick={this.loggout}><i className="fa fa-lock" /> Cerrar session</DropdownItem>
+
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>

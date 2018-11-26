@@ -1,7 +1,7 @@
 export default {
   items: [
     {
-      name: 'APP Contadores',
+      name: 'APP Contadores chido',
       url: '/dashboard',
       icon: 'icon-speedometer',
     },

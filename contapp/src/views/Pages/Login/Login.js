@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {post} from '../../../api/post';
+
 import {Redirect} from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row ,Alert, FormFeedback} from 'reactstrap';
+import api from '../../../api/';
 
 class Login extends Component {
  constructor(props){
@@ -15,7 +16,8 @@ class Login extends Component {
      error:{
        usuario:'',
        contraseña:''
-     }
+     },
+     isLoggedin: false
    }
  }
  
@@ -46,17 +48,17 @@ class Login extends Component {
         this.setState({error:errores});
       }else{
         errores.contraseña="";
-        console.log('error contraseña')
         this.setState({error:errores})
         return 1;
       }
       errores.usuario="";
       errores.contraseña=this.state.password;
-      this.setState({error:errores  })
+      this.setState({error:errores })
       return 1;
     }
     
   }
+  
   onChange = (e) =>{
     this.setState({[e.target.name]: e.target.value});
     this.validate(this.state);
@@ -64,29 +66,29 @@ class Login extends Component {
   }
   onSubmit = () =>{
     if(this.validate(this.state)){
-
-      post('login',this.state).then((result)=>{
-        let response= result;
-        if(response.user){
-          sessionStorage.setItem('usuario', response.user);
-          this.setState({redirect:true});
-        }
-        console.log(response);
-      })
-      this.setState({loading:true})
-    }else{
-      console.log("no mande ni mergas");
-    }
+      sessionStorage.setItem('xkey','popo');
+      sessionStorage.setItem('ROL','ADMIN');
+      console.log('ya lo puse alchile');
+      this.setState({redirect:true});
+      /*api.login(this.state).then((token) => {
+        console.log(token);
+      }).catch((error)=>{
+        console.log('Error');
+      })*/
+      }
   }
   register = () =>{
     this.setState({register:true})
   }
+  
   render() {
+    
     if(this.state.redirect){
-      return (<Redirect to={"/home"}/>);
+      
+      console.log('lo intente');
+      return (<Redirect to={"/"}/>);
     }
     if(this.state.register){
-      
       return (<Redirect to={"/register"}/>);
     }
     const {error} = this.state; 
@@ -107,7 +109,7 @@ class Login extends Component {
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Username" autoComplete="username" name="username"  onChange={this.onChange} invalid={error.usuario?true:false}/>
+                        <Input type="text" placeholder="Username" autoComplete="username" name="username" value={this.state.username} onChange={this.onChange} invalid={error.usuario?true:false}/>
                         <FormFeedback >
                         Correo no valido
                         </FormFeedback>
@@ -119,7 +121,7 @@ class Login extends Component {
                             <i className="icon-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Password" autoComplete="current-password" name="password" onChange={this.onChange} invalid={error.contraseña?true:false}/>
+                        <Input type="password" placeholder="Password" autoComplete="current-password" name="password" value={this.state.password} onChange={this.onChange} invalid={error.contraseña?true:false}/>
                         <FormFeedback >
                         Contraseña no valida
                         </FormFeedback> 
